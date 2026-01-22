@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import sandraImage from "@/assets/sandra-russet-silk.webp";
 import brettImage from "@/assets/brett-boyland.jpg";
 import { CheckCircle } from "lucide-react";
@@ -10,9 +9,8 @@ const Therapists = () => {
       title: "Psychoanalytic Psychotherapist",
       image: sandraImage,
       credentials: [
-        "Certified with ANZAP (Australia and New Zealand Association of Psychotherapists)",
+        "Clinical Member of ANZAP and PACFA Professional Body",
         "Over 30 years' experience in psychotherapy and mental health",
-        "Registered member of PACFA professional body",
         "Specializes in deep insight work and pattern recognition",
       ],
     },
@@ -21,23 +19,22 @@ const Therapists = () => {
       title: "Master of Counselling",
       image: brettImage,
       credentials: [
-        "Certified with ANZAP (Australia and New Zealand Association of Psychotherapists)",
+        "Clinical Member of PACFA Professional Body",
         "Over 25 years' experience in counselling and mental health",
-        "Registered with PACFA (Psychotherapy and Counselling Federation of Australia)",
         "Expertise in practical tools and evidence-based interventions",
       ],
     },
   ];
 
   return (
-    <section id="therapists" className="section-padding bg-background">
+    <section id="therapists" className="section-padding bg-muted/30">
       <div className="container-wide mx-auto">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-primary text-sm font-semibold tracking-wider uppercase mb-4 block animate-fade-up">
             Meet Your Therapists
           </span>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground mb-6 animate-fade-up delay-100">
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground mb-6 animate-fade-up delay-100 italic">
             Highly Qualified Professionals{" "}
             <span className="block">Dedicated to Your Care</span>
           </h2>
@@ -47,17 +44,17 @@ const Therapists = () => {
         </div>
 
         {/* Therapist Cards */}
-        <div className="grid lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {therapists.map((therapist, index) => (
             <div
               key={index}
-              className="group bg-card rounded-2xl border border-border overflow-hidden hover:shadow-card transition-all duration-300 animate-fade-up"
+              className="group bg-card rounded-2xl border border-border p-6 hover:shadow-card transition-all duration-300 animate-fade-up"
               style={{ animationDelay: `${(index + 3) * 100}ms` }}
             >
-              <div className="flex flex-col sm:flex-row">
+              <div className="flex gap-6">
                 {/* Image */}
-                <div className="sm:w-40 md:w-48 flex-shrink-0">
-                  <div className="aspect-square sm:h-full">
+                <div className="flex-shrink-0">
+                  <div className="w-32 h-40 md:w-40 md:h-48 overflow-hidden rounded-bl-[3rem] rounded-tr-[3rem] rounded-tl-lg rounded-br-lg">
                     <img
                       src={therapist.image}
                       alt={therapist.name}
@@ -67,7 +64,7 @@ const Therapists = () => {
                 </div>
 
                 {/* Content */}
-                <div className="p-5 flex-grow">
+                <div className="flex-grow pt-2">
                   <h3 className="font-display text-xl font-semibold text-foreground mb-1">
                     {therapist.name}
                   </h3>
@@ -76,11 +73,11 @@ const Therapists = () => {
                   </p>
 
                   {/* Credentials List */}
-                  <ul className="space-y-2">
+                  <ul className="space-y-3">
                     {therapist.credentials.map((credential, i) => (
                       <li key={i} className="flex items-start gap-2">
-                        <CheckCircle className="text-primary flex-shrink-0 mt-0.5" size={14} />
-                        <span className="text-muted-foreground text-xs leading-relaxed">
+                        <CheckCircle className="text-primary flex-shrink-0 mt-0.5" size={16} />
+                        <span className="text-muted-foreground text-sm leading-relaxed">
                           {credential}
                         </span>
                       </li>
