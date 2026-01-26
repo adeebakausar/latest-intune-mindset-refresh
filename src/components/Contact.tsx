@@ -197,6 +197,22 @@ const Contact = () => {
                   </div>
                 </div>
 
+                {/* Phone Section */}
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <Phone className="text-primary" size={22} />
+                  </div>
+                  <div>
+                    <p className="font-medium text-foreground mb-2">Call Us</p>
+                    <a 
+                      href="tel:0457264147" 
+                      className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                    >
+                      0457 264 147
+                    </a>
+                  </div>
+                </div>
+
                 {/* Response Time */}
                 <div className="pt-6 border-t border-border/50">
                   <div className="flex items-start gap-3">

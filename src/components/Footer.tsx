@@ -1,4 +1,4 @@
-import { Heart } from "lucide-react";
+import { Heart, Linkedin, Facebook, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import logoIntune from "@/assets/logo-intune.png";
 
@@ -42,9 +42,33 @@ const Footer = () => {
             <p className="text-primary-foreground/60 leading-relaxed max-w-sm mb-6">
               Professional counselling and mental health support. No fluff, no guesswork—just clinically grounded care from experienced psychotherapists.
             </p>
-            <div className="flex items-center gap-2 text-sm">
+            <div className="flex items-center gap-2 text-sm mb-4">
               <Heart size={14} className="text-accent" />
               <span className="text-primary-foreground/60">55+ years combined experience</span>
+            </div>
+            <div className="flex items-center gap-3 text-sm mb-4">
+              <Phone size={14} className="text-accent" />
+              <a href="tel:0457264147" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors">
+                0457 264 147
+              </a>
+            </div>
+            <div className="flex items-center gap-4">
+              <a 
+                href="https://www.linkedin.com/in/brett-boyland-8718a014b/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-primary-foreground/20 transition-colors"
+              >
+                <Linkedin size={18} className="text-primary-foreground/70" />
+              </a>
+              <a 
+                href="https://www.facebook.com/brett.boyland.14/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-primary-foreground/20 transition-colors"
+              >
+                <Facebook size={18} className="text-primary-foreground/70" />
+              </a>
             </div>
           </div>
 

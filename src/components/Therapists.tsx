@@ -1,5 +1,5 @@
-import sandraImage from "@/assets/sandra-russet-silk.webp";
-import brettImage from "@/assets/brett-boyland.jpg";
+import sandraImage from "@/assets/sandra-russet-silk.png";
+import brettImage from "@/assets/brett-boyland.png";
 import { CheckCircle } from "lucide-react";
 
 const Therapists = () => {

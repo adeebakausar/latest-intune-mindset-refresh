@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Calendar, User, Clock, ArrowRight, CalendarDays } from "lucide-react";
-import sandraImage from "@/assets/sandra-russet-silk.webp";
-import brettImage from "@/assets/brett-boyland.jpg";
+import sandraImage from "@/assets/sandra-russet-silk.png";
+import brettImage from "@/assets/brett-boyland.png";
 
 const Booking = () => {
   const therapists = [
