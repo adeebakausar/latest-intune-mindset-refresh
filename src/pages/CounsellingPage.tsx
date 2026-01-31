@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -6,8 +7,31 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CheckCircle, Clock, Calendar, User, Heart, Shield, ArrowLeft } from "lucide-react";
 import sandraImage from "@/assets/sandra-russet-silk.webp";
 import brettImage from "@/assets/brett-boyland.jpg";
+import { supabase } from "@/integrations/supabase/client";
 
 const CounsellingPage = () => {
+  const [sandraCalendarUrl, setSandraCalendarUrl] = useState<string | null>(null);
+  const [brettCalendarUrl, setBrettCalendarUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchCalendarSettings = async () => {
+      const { data } = await supabase
+        .from("settings")
+        .select("key, value")
+        .in("key", ["sandra_calendar_url", "brett_calendar_url"]);
+      
+      data?.forEach((setting) => {
+        if (setting.key === "sandra_calendar_url") {
+          setSandraCalendarUrl(setting.value);
+        } else if (setting.key === "brett_calendar_url") {
+          setBrettCalendarUrl(setting.value);
+        }
+      });
+    };
+    
+    fetchCalendarSettings();
+  }, []);
+
   const therapists = [
     {
       id: "sandra",
@@ -17,8 +41,7 @@ const CounsellingPage = () => {
       credentials: "Clinical Member of ANZAP and PACFA Professional Body",
       experience: "Over 30 years' experience",
       specialties: ["Deep insight work", "Pattern recognition", "Long-term therapy"],
-      // TODO: Replace with actual booking calendar embed URL
-      calendarEmbed: null,
+      calendarEmbed: sandraCalendarUrl,
     },
     {
       id: "brett",
@@ -28,8 +51,7 @@ const CounsellingPage = () => {
       credentials: "Clinical Member of PACFA Professional Body",
       experience: "Over 25 years' experience",
       specialties: ["Practical tools", "Evidence-based interventions", "Solution-focused therapy"],
-      // TODO: Replace with actual booking calendar embed URL
-      calendarEmbed: null,
+      calendarEmbed: brettCalendarUrl,
     },
   ];
 

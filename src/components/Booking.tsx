@@ -1,11 +1,35 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Calendar, User, Clock, ArrowRight, CalendarDays } from "lucide-react";
 import sandraImage from "@/assets/sandra-russet-silk.png";
 import brettImage from "@/assets/brett-boyland.png";
+import { supabase } from "@/integrations/supabase/client";
 
 const Booking = () => {
+  const [sandraCalendarUrl, setSandraCalendarUrl] = useState<string | null>(null);
+  const [brettCalendarUrl, setBrettCalendarUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchCalendarSettings = async () => {
+      const { data } = await supabase
+        .from("settings")
+        .select("key, value")
+        .in("key", ["sandra_calendar_url", "brett_calendar_url"]);
+      
+      data?.forEach((setting) => {
+        if (setting.key === "sandra_calendar_url") {
+          setSandraCalendarUrl(setting.value);
+        } else if (setting.key === "brett_calendar_url") {
+          setBrettCalendarUrl(setting.value);
+        }
+      });
+    };
+    
+    fetchCalendarSettings();
+  }, []);
+
   const therapists = [
     {
       id: "sandra",
@@ -13,8 +37,7 @@ const Booking = () => {
       title: "Psychoanalytic Psychotherapist",
       image: sandraImage,
       price: "$110.00 AUD",
-      // TODO: Replace with actual booking calendar embed URL
-      calendarEmbed: null,
+      calendarEmbed: sandraCalendarUrl,
     },
     {
       id: "brett",
@@ -22,8 +45,7 @@ const Booking = () => {
       title: "Master of Counselling",
       image: brettImage,
       price: "$110.00 AUD",
-      // TODO: Replace with actual booking calendar embed URL
-      calendarEmbed: null,
+      calendarEmbed: brettCalendarUrl,
     },
   ];
 
