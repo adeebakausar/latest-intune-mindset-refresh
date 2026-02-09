@@ -21,6 +21,7 @@ export interface CustomerData {
   email: string;
   phone: string;
   address: string;
+  notes: string;
 }
 
 export const therapistInfo: Record<string, { name: string; title: string; image: string; price: string }> = {
@@ -43,7 +44,7 @@ const BookingFlow = () => {
   const [selectedTherapist, setSelectedTherapist] = useState("sandra");
   const [slots, setSlots] = useState<Slot[]>([]);
   const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null);
-  const [customerData, setCustomerData] = useState<CustomerData>({ name: "", email: "", phone: "", address: "" });
+  const [customerData, setCustomerData] = useState<CustomerData>({ name: "", email: "", phone: "", address: "", notes: "" });
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

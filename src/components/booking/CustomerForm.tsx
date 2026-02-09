@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ArrowLeft, ArrowRight, User, Mail, Phone, MapPin, Clock, Calendar } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
+import { ArrowLeft, ArrowRight, User, Mail, Phone, MapPin, Clock, Calendar, MessageSquare } from "lucide-react";
 import { Slot, CustomerData, therapistInfo } from "./BookingFlow";
 
 interface CustomerFormProps {
@@ -126,6 +127,21 @@ const CustomerForm = ({ selectedSlot, customerData, onSubmit, onBack }: Customer
               maxLength={255}
             />
           </div>
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="notes" className="flex items-center gap-2">
+            <MessageSquare size={14} /> Special Requests or Notes
+          </Label>
+          <Textarea
+            id="notes"
+            value={form.notes}
+            onChange={(e) => setForm({ ...form, notes: e.target.value })}
+            placeholder="Any special requests, topics you'd like to discuss, or anything we should know before your session (optional)"
+            maxLength={500}
+            rows={3}
+          />
+          <p className="text-xs text-muted-foreground">{form.notes.length}/500 characters</p>
         </div>
 
         <div className="flex items-center gap-4 pt-4 border-t border-border/50">
