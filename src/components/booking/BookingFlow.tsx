@@ -3,6 +3,7 @@ import { CalendarDays } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import SlotSelection from "./SlotSelection";
 import CustomerForm from "./CustomerForm";
+import PaymentForm, { type CardData } from "./PaymentForm";
 import BookingConfirmation from "./BookingConfirmation";
 import sandraImage from "@/assets/sandra-russet-silk.png";
 import brettImage from "@/assets/brett-boyland.png";
@@ -40,11 +41,12 @@ export const therapistInfo: Record<string, { name: string; title: string; image:
 };
 
 const BookingFlow = () => {
-  const [step, setStep] = useState<"select" | "details" | "confirm">("select");
+  const [step, setStep] = useState<"select" | "details" | "payment" | "confirm">("select");
   const [selectedTherapist, setSelectedTherapist] = useState("sandra");
   const [slots, setSlots] = useState<Slot[]>([]);
   const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null);
   const [customerData, setCustomerData] = useState<CustomerData>({ name: "", email: "", phone: "", address: "", notes: "" });
+  const [cardData, setCardData] = useState<CardData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -72,12 +74,18 @@ const BookingFlow = () => {
 
   const handleCustomerSubmit = (data: CustomerData) => {
     setCustomerData(data);
+    setStep("payment");
+  };
+
+  const handlePaymentSubmit = (data: CardData) => {
+    setCardData(data);
     setStep("confirm");
   };
 
   const handleBack = () => {
     if (step === "details") setStep("select");
-    if (step === "confirm") setStep("details");
+    if (step === "payment") setStep("details");
+    if (step === "confirm") setStep("payment");
   };
 
   return (
@@ -102,14 +110,15 @@ const BookingFlow = () => {
             {[
               { key: "select", label: "Choose Slot" },
               { key: "details", label: "Your Details" },
-              { key: "confirm", label: "Confirm & Pay" },
+              { key: "payment", label: "Payment" },
+              { key: "confirm", label: "Confirm" },
             ].map((s, i) => (
               <div key={s.key} className="flex items-center gap-2">
                 <div
                   className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-colors ${
                     step === s.key
                       ? "bg-primary text-primary-foreground"
-                      : ["select", "details", "confirm"].indexOf(step) > i
+                      : ["select", "details", "payment", "confirm"].indexOf(step) > i
                       ? "bg-primary/20 text-primary"
                       : "bg-muted text-muted-foreground"
                   }`}
@@ -123,7 +132,7 @@ const BookingFlow = () => {
                 >
                   {s.label}
                 </span>
-                {i < 2 && <div className="w-8 lg:w-16 h-px bg-border" />}
+                {i < 3 && <div className="w-8 lg:w-16 h-px bg-border" />}
               </div>
             ))}
           </div>
@@ -144,6 +153,14 @@ const BookingFlow = () => {
               selectedSlot={selectedSlot}
               customerData={customerData}
               onSubmit={handleCustomerSubmit}
+              onBack={handleBack}
+            />
+          )}
+          {step === "payment" && selectedSlot && (
+            <PaymentForm
+              selectedSlot={selectedSlot}
+              customerData={customerData}
+              onSubmit={handlePaymentSubmit}
               onBack={handleBack}
             />
           )}
