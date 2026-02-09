@@ -55,6 +55,25 @@ const BookingConfirmation = ({ selectedSlot, customerData, onBack }: BookingConf
 
       if (slotError) throw slotError;
 
+      // Send email notification to therapists
+      try {
+        await supabase.functions.invoke("send-booking-notification", {
+          body: {
+            therapistName: info.name,
+            customerName: customerData.name.trim(),
+            customerEmail: customerData.email.trim(),
+            customerPhone: customerData.phone.trim(),
+            customerAddress: customerData.address?.trim() || undefined,
+            sessionDate: formatDate(selectedSlot.slot_date),
+            sessionTime: `${formatTime(selectedSlot.start_time)} – ${formatTime(selectedSlot.end_time)}`,
+            sessionPrice: info.price,
+          },
+        });
+      } catch (emailError) {
+        console.error("Email notification failed:", emailError);
+        // Don't block booking if email fails
+      }
+
       setIsConfirmed(true);
       toast.success("Booking confirmed! We'll be in touch shortly.");
     } catch (error) {
