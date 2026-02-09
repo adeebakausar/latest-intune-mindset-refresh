@@ -14,6 +14,89 @@ export type Database = {
   }
   public: {
     Tables: {
+      available_slots: {
+        Row: {
+          created_at: string
+          end_time: string
+          id: string
+          is_booked: boolean
+          slot_date: string
+          start_time: string
+          therapist: string
+        }
+        Insert: {
+          created_at?: string
+          end_time: string
+          id?: string
+          is_booked?: boolean
+          slot_date: string
+          start_time: string
+          therapist: string
+        }
+        Update: {
+          created_at?: string
+          end_time?: string
+          id?: string
+          is_booked?: boolean
+          slot_date?: string
+          start_time?: string
+          therapist?: string
+        }
+        Relationships: []
+      }
+      bookings: {
+        Row: {
+          created_at: string
+          customer_address: string | null
+          customer_email: string
+          customer_name: string
+          customer_phone: string
+          id: string
+          payment_status: string
+          session_price: number
+          slot_id: string
+          stripe_session_id: string | null
+          therapist: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          customer_address?: string | null
+          customer_email: string
+          customer_name: string
+          customer_phone: string
+          id?: string
+          payment_status?: string
+          session_price?: number
+          slot_id: string
+          stripe_session_id?: string | null
+          therapist: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          customer_address?: string | null
+          customer_email?: string
+          customer_name?: string
+          customer_phone?: string
+          id?: string
+          payment_status?: string
+          session_price?: number
+          slot_id?: string
+          stripe_session_id?: string | null
+          therapist?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_slot_id_fkey"
+            columns: ["slot_id"]
+            isOneToOne: false
+            referencedRelation: "available_slots"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       settings: {
         Row: {
           created_at: string

@@ -7,9 +7,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Settings, CreditCard, Calendar, Save, CheckCircle, AlertCircle, Eye, EyeOff, ArrowLeft } from "lucide-react";
+import { Settings, CreditCard, Calendar, Save, CheckCircle, AlertCircle, Eye, EyeOff, ArrowLeft, CalendarDays } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import SlotManagement from "@/components/admin/SlotManagement";
 
 const SettingsPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -142,17 +143,26 @@ const SettingsPage = () => {
                 </div>
               </div>
 
-              <Tabs defaultValue="calendars" className="w-full">
-                <TabsList className="grid w-full grid-cols-2 mb-8">
+              <Tabs defaultValue="slots" className="w-full">
+                <TabsList className="grid w-full grid-cols-3 mb-8">
+                  <TabsTrigger value="slots" className="flex items-center gap-2">
+                    <CalendarDays size={18} />
+                    Time Slots
+                  </TabsTrigger>
                   <TabsTrigger value="calendars" className="flex items-center gap-2">
                     <Calendar size={18} />
-                    Booking Calendars
+                    Calendar Links
                   </TabsTrigger>
                   <TabsTrigger value="stripe" className="flex items-center gap-2">
                     <CreditCard size={18} />
                     Stripe Payments
                   </TabsTrigger>
                 </TabsList>
+
+                {/* Slot Management Tab */}
+                <TabsContent value="slots">
+                  <SlotManagement />
+                </TabsContent>
 
                 {/* Calendar Settings Tab */}
                 <TabsContent value="calendars">
