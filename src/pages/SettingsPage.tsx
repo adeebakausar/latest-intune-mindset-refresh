@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Settings, CreditCard, Calendar, Save, CheckCircle, AlertCircle, Eye, EyeOff, ArrowLeft, CalendarDays } from "lucide-react";
+import { Settings, CreditCard, Calendar, Save, CheckCircle, AlertCircle, Eye, EyeOff, ArrowLeft, CalendarDays, CircleDollarSign, ExternalLink } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import SlotManagement from "@/components/admin/SlotManagement";
@@ -153,9 +153,9 @@ const SettingsPage = () => {
                     <Calendar size={18} />
                     Calendar Links
                   </TabsTrigger>
-                  <TabsTrigger value="stripe" className="flex items-center gap-2">
-                    <CreditCard size={18} />
-                    Stripe Payments
+                  <TabsTrigger value="payments" className="flex items-center gap-2">
+                    <CircleDollarSign size={18} />
+                    Payment Methods
                   </TabsTrigger>
                 </TabsList>
 
@@ -247,84 +247,107 @@ const SettingsPage = () => {
                   </Card>
                 </TabsContent>
 
-                {/* Stripe Settings Tab */}
-                <TabsContent value="stripe">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
-                        <CreditCard className="w-5 h-5 text-primary" />
-                        Stripe Payment Integration
-                      </CardTitle>
-                      <CardDescription>
-                        Connect your Stripe account to accept payments for counselling sessions.
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-6">
-                      <div className="bg-accent/50 border border-border rounded-lg p-4">
-                        <h4 className="font-medium text-foreground text-sm mb-2 flex items-center gap-2">
-                          <AlertCircle size={16} className="text-primary" />
-                          Important Security Note
-                        </h4>
-                        <p className="text-sm text-muted-foreground">
-                          Your Stripe Secret Key will be securely stored. Never share this key publicly. 
-                          After entering it here, contact your developer to complete the backend integration.
-                        </p>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="stripe-key">Stripe Secret Key</Label>
-                        <div className="relative">
-                          <Input
-                            id="stripe-key"
-                            type={showStripeKey ? "text" : "password"}
-                            placeholder="sk_live_..."
-                            value={stripeSecretKey}
-                            onChange={(e) => setStripeSecretKey(e.target.value)}
-                            className="pr-10"
-                          />
-                          <button
-                            type="button"
-                            onClick={() => setShowStripeKey(!showStripeKey)}
-                            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                          >
-                            {showStripeKey ? <EyeOff size={18} /> : <Eye size={18} />}
-                          </button>
+                {/* Payment Methods Tab */}
+                <TabsContent value="payments">
+                  <div className="space-y-6">
+                    {/* PayPal - Active */}
+                    <Card className="border-primary/30">
+                      <CardHeader>
+                        <div className="flex items-center justify-between">
+                          <CardTitle className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-lg bg-[hsl(210,80%,50%)]/10 flex items-center justify-center">
+                              <CreditCard className="w-5 h-5 text-[hsl(210,80%,50%)]" />
+                            </div>
+                            PayPal
+                          </CardTitle>
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">
+                            <CheckCircle size={14} />
+                            Active
+                          </span>
                         </div>
-                        <p className="text-xs text-muted-foreground">
-                          Find this in your Stripe Dashboard → Developers → API Keys
-                        </p>
-                      </div>
+                        <CardDescription>
+                          PayPal is connected and accepting payments for session bookings.
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="bg-primary/5 rounded-xl p-4 space-y-2">
+                          <p className="text-sm text-foreground font-medium">✅ PayPal is live and processing payments</p>
+                          <p className="text-sm text-muted-foreground">
+                            Customers can pay securely via PayPal when confirming their booking. Funds are deposited directly to your linked PayPal account.
+                          </p>
+                        </div>
+                      </CardContent>
+                    </Card>
 
-                      <div className="flex items-center gap-4 pt-4 border-t">
-                        <Button 
-                          onClick={handleSaveStripeSettings}
-                          disabled={isSaving || !stripeSecretKey.trim()}
-                        >
-                          {isSaving ? (
-                            <>Saving...</>
-                          ) : (
-                            <>
-                              <Save size={18} />
-                              Save Stripe Settings
-                            </>
-                          )}
+                    {/* Payoneer - Setup Instructions */}
+                    <Card>
+                      <CardHeader>
+                        <div className="flex items-center justify-between">
+                          <CardTitle className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center">
+                              <CircleDollarSign className="w-5 h-5 text-muted-foreground" />
+                            </div>
+                            Payoneer
+                          </CardTitle>
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-muted text-muted-foreground text-sm font-medium">
+                            <AlertCircle size={14} />
+                            Not Connected
+                          </span>
+                        </div>
+                        <CardDescription>
+                          Add Payoneer as an additional payment method for your customers.
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <div className="bg-muted/50 rounded-xl p-5">
+                          <h4 className="font-medium text-sm mb-3 flex items-center gap-2">
+                            <Settings size={16} className="text-primary" />
+                            How to Add Payoneer
+                          </h4>
+                          <ol className="text-sm text-muted-foreground space-y-2 list-decimal list-inside">
+                            <li>Go to the <strong>Payments</strong> section in your Shopify admin</li>
+                            <li>Click <strong>Add payment method</strong> and choose <strong>Payoneer</strong></li>
+                            <li>Follow the prompts to integrate it with your store</li>
+                            <li>Once connected, Payoneer will appear as a payment option for customers</li>
+                          </ol>
+                        </div>
+                        <Button variant="outline" className="gap-2" asChild>
+                          <a href="https://www.payoneer.com" target="_blank" rel="noopener noreferrer">
+                            <ExternalLink size={16} />
+                            Visit Payoneer
+                          </a>
                         </Button>
-                      </div>
+                      </CardContent>
+                    </Card>
 
-                      <div className="bg-muted/50 rounded-lg p-4">
-                        <h4 className="font-medium text-sm mb-2 flex items-center gap-2">
-                          <CheckCircle size={16} className="text-primary" />
-                          Next Steps After Adding Your Key
-                        </h4>
-                        <ol className="text-sm text-muted-foreground space-y-1 list-decimal list-inside">
-                          <li>Save your Stripe Secret Key above</li>
-                          <li>Contact your developer to complete the integration</li>
-                          <li>Your developer will securely add the key to the backend</li>
-                          <li>Once complete, payment processing will be enabled</li>
-                        </ol>
-                      </div>
-                    </CardContent>
-                  </Card>
+                    {/* Stripe - Optional */}
+                    <Card>
+                      <CardHeader>
+                        <div className="flex items-center justify-between">
+                          <CardTitle className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center">
+                              <CreditCard className="w-5 h-5 text-muted-foreground" />
+                            </div>
+                            Stripe
+                          </CardTitle>
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-muted text-muted-foreground text-sm font-medium">
+                            <AlertCircle size={14} />
+                            Not Connected
+                          </span>
+                        </div>
+                        <CardDescription>
+                          Accept credit/debit card payments directly via Stripe.
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="bg-muted/50 rounded-xl p-4">
+                          <p className="text-sm text-muted-foreground">
+                            Stripe integration can be enabled to accept direct card payments. Contact your developer to set up Stripe for your store.
+                          </p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
                 </TabsContent>
               </Tabs>
             </div>
