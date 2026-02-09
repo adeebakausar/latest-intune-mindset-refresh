@@ -1,37 +1,13 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CheckCircle, Clock, Calendar, User, Heart, Shield, ArrowLeft } from "lucide-react";
+import { CheckCircle, Clock, Calendar, Heart, Shield, ArrowLeft } from "lucide-react";
 import sandraImage from "@/assets/sandra-russet-silk.webp";
 import brettImage from "@/assets/brett-boyland.jpg";
-import { supabase } from "@/integrations/supabase/client";
+import BookingFlow from "@/components/booking/BookingFlow";
 
 const CounsellingPage = () => {
-  const [sandraCalendarUrl, setSandraCalendarUrl] = useState<string | null>(null);
-  const [brettCalendarUrl, setBrettCalendarUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchCalendarSettings = async () => {
-      const { data } = await supabase
-        .from("settings")
-        .select("key, value")
-        .in("key", ["sandra_calendar_url", "brett_calendar_url"]);
-      
-      data?.forEach((setting) => {
-        if (setting.key === "sandra_calendar_url") {
-          setSandraCalendarUrl(setting.value);
-        } else if (setting.key === "brett_calendar_url") {
-          setBrettCalendarUrl(setting.value);
-        }
-      });
-    };
-    
-    fetchCalendarSettings();
-  }, []);
-
   const therapists = [
     {
       id: "sandra",
@@ -41,7 +17,6 @@ const CounsellingPage = () => {
       credentials: "Clinical Member of ANZAP and PACFA Professional Body",
       experience: "Over 30 years' experience",
       specialties: ["Deep insight work", "Pattern recognition", "Long-term therapy"],
-      calendarEmbed: sandraCalendarUrl,
     },
     {
       id: "brett",
@@ -51,7 +26,6 @@ const CounsellingPage = () => {
       credentials: "Clinical Member of PACFA Professional Body",
       experience: "Over 25 years' experience",
       specialties: ["Practical tools", "Evidence-based interventions", "Solution-focused therapy"],
-      calendarEmbed: brettCalendarUrl,
     },
   ];
 
@@ -117,7 +91,7 @@ const CounsellingPage = () => {
                 </div>
 
                 <Button size="lg" asChild>
-                  <a href="#book-session">
+                  <a href="#booking">
                     Book Your Session
                     <Calendar size={18} />
                   </a>
@@ -198,77 +172,8 @@ const CounsellingPage = () => {
           </div>
         </section>
 
-        {/* Booking Section */}
-        <section id="book-session" className="section-padding bg-background">
-          <div className="container-wide mx-auto">
-            <div className="text-center max-w-3xl mx-auto mb-12">
-              <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground mb-4">
-                Book Your Counselling Session
-              </h2>
-              <p className="text-muted-foreground text-lg">
-                Select your preferred therapist and choose a time that works for you.
-              </p>
-            </div>
-
-            <div className="max-w-4xl mx-auto">
-              <Tabs defaultValue="sandra" className="w-full">
-                <TabsList className="grid w-full grid-cols-2 mb-8 h-auto p-1">
-                  {therapists.map((therapist) => (
-                    <TabsTrigger
-                      key={therapist.id}
-                      value={therapist.id}
-                      className="flex items-center gap-3 py-4 px-6 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
-                    >
-                      <img
-                        src={therapist.image}
-                        alt={therapist.name}
-                        className="w-10 h-10 rounded-full object-cover"
-                      />
-                      <div className="text-left">
-                        <span className="block font-medium">{therapist.name}</span>
-                        <span className="block text-xs opacity-70">{therapist.title}</span>
-                      </div>
-                    </TabsTrigger>
-                  ))}
-                </TabsList>
-
-                {therapists.map((therapist) => (
-                  <TabsContent key={therapist.id} value={therapist.id}>
-                    <div className="bg-card rounded-2xl border border-border/50 overflow-hidden">
-                      <div className="min-h-[520px] lg:min-h-[600px] flex items-center justify-center bg-muted/20">
-                        {therapist.calendarEmbed ? (
-                          <iframe
-                            src={therapist.calendarEmbed}
-                            className="w-full h-full min-h-[520px] lg:min-h-[600px] border-0"
-                            title={`Book counselling with ${therapist.name}`}
-                          />
-                        ) : (
-                          <div className="text-center p-12">
-                            <Calendar className="w-16 h-16 mx-auto mb-4 text-primary/50" />
-                            <h3 className="font-display text-xl font-semibold text-foreground mb-2">
-                              Calendar Coming Soon
-                            </h3>
-                            <p className="text-muted-foreground max-w-md mx-auto mb-6">
-                              {therapist.name}'s booking calendar will be available here shortly.
-                            </p>
-                            <Button variant="outline" asChild>
-                              <Link to="/contact">Contact Us to Book</Link>
-                            </Button>
-                          </div>
-                        )}
-                      </div>
-                      <div className="p-4 bg-muted/30 border-t border-border/50">
-                        <p className="text-sm text-muted-foreground text-center">
-                          💡 Session fee: <strong className="text-primary">$110.00 AUD</strong> • Duration: 50-60 minutes
-                        </p>
-                      </div>
-                    </div>
-                  </TabsContent>
-                ))}
-              </Tabs>
-            </div>
-          </div>
-        </section>
+        {/* Booking Section - Now uses the full BookingFlow */}
+        <BookingFlow />
       </main>
       <Footer />
     </div>
