@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, CheckCircle, Calendar, Clock, User, Mail, Phone, MapPin, CreditCard } from "lucide-react";
+import { ArrowLeft, CheckCircle, Calendar, Clock, User, Mail, Phone, MapPin, CreditCard, MessageSquare, Shield, Lock } from "lucide-react";
 import { Slot, CustomerData, therapistInfo } from "./BookingFlow";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -158,6 +158,14 @@ const BookingConfirmation = ({ selectedSlot, customerData, onBack }: BookingConf
               </div>
             )}
           </div>
+          {customerData.notes && (
+            <div className="mt-3 pt-3 border-t border-border/30">
+              <div className="flex items-start gap-2 text-sm text-foreground">
+                <MessageSquare size={14} className="text-primary mt-0.5" />
+                <span>{customerData.notes}</span>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Price */}
@@ -166,9 +174,23 @@ const BookingConfirmation = ({ selectedSlot, customerData, onBack }: BookingConf
           <span className="font-display text-2xl font-semibold text-primary">{info.price}</span>
         </div>
 
+        {/* Payment placeholder */}
+        <div className="bg-muted/30 rounded-xl p-5 border border-dashed border-border">
+          <div className="flex items-center gap-2 mb-2">
+            <CreditCard size={16} className="text-primary" />
+            <h4 className="font-semibold text-foreground text-sm">Payment</h4>
+          </div>
+          <p className="text-sm text-muted-foreground mb-3">
+            Secure payment gateway integration coming soon. Payment will be collected at the session or via invoice sent to your email.
+          </p>
+          <div className="flex items-center gap-4 text-xs text-muted-foreground">
+            <span className="flex items-center gap-1"><Shield size={12} /> Secure checkout</span>
+            <span className="flex items-center gap-1"><Lock size={12} /> SSL encrypted</span>
+          </div>
+        </div>
+
         <p className="text-xs text-muted-foreground">
-          Payment will be collected at the session or via invoice sent to your email. 
-          By confirming, you agree to our cancellation policy.
+          By confirming, you agree to our cancellation policy. Your data is handled securely.
         </p>
 
         <div className="flex items-center gap-4 pt-4 border-t border-border/50">
