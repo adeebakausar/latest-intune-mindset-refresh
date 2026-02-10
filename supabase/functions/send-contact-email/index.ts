@@ -61,7 +61,7 @@ const handler = async (req: Request): Promise<Response> => {
     const recipients = ["intunemindset@gmail.com", "brettboy753@gmail.com"];
     const emailPromises = recipients.map((to) =>
       resend.emails.send({
-        from: "Intune Contact <onboarding@resend.dev>",
+        from: "Intune Contact <contact@intunetherapy.com.au>",
         to: [to],
         subject: `Contact Form: Message from ${name}`,
         html: htmlContent,
