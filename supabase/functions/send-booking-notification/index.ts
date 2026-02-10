@@ -46,7 +46,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Get notification emails from environment or use defaults
     const sandraEmail = Deno.env.get("SANDRA_NOTIFICATION_EMAIL") || "sandra@intunetherapy.com.au";
     const brettEmail = Deno.env.get("BRETT_NOTIFICATION_EMAIL") || "brett@intunetherapy.com.au";
-    const fromEmail = "bookings@intunetherapy.com.au";
+    const fromEmail = "bookings@intunemindset.store";
 
     const htmlContent = `
       <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f8f7f5; padding: 32px;">
