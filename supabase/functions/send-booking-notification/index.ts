@@ -43,8 +43,7 @@ const handler = async (req: Request): Promise<Response> => {
       sessionPrice,
     } = body;
 
-    // Get notification emails from environment or use defaults
-    const sandraEmail = Deno.env.get("SANDRA_NOTIFICATION_EMAIL") || "sandra@intunetherapy.com.au";
+    // Get notification email from environment or use default
     const brettEmail = Deno.env.get("BRETT_NOTIFICATION_EMAIL") || "brett@intunetherapy.com.au";
     const fromEmail = "bookings@intunemindset.store";
 
@@ -77,8 +76,8 @@ const handler = async (req: Request): Promise<Response> => {
       </div>
     `;
 
-    // Send to both Sandra and Brett
-    const emailPromises = [sandraEmail, brettEmail].map((to) =>
+    // Send to Brett
+    const emailPromises = [brettEmail].map((to) =>
       resend.emails.send({
         from: `Intune Bookings <${fromEmail}>`,
         to: [to],

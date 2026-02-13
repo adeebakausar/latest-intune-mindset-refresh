@@ -3,31 +3,19 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Clock, Calendar, Heart, Shield, ArrowLeft } from "lucide-react";
-import sandraImage from "@/assets/sandra-russet-silk.webp";
 import brettImage from "@/assets/brett-boyland.jpg";
 import BookingFlow from "@/components/booking/BookingFlow";
 
 const CounsellingPage = () => {
-  const therapists = [
-    {
-      id: "sandra",
-      name: "Sandra Russet-Silk",
-      title: "Psychoanalytic Psychotherapist",
-      image: sandraImage,
-      credentials: "Clinical Member of ANZAP and PACFA Professional Body",
-      experience: "Over 30 years' experience",
-      specialties: ["Deep insight work", "Pattern recognition", "Long-term therapy"],
-    },
-    {
-      id: "brett",
-      name: "Brett Boyland",
-      title: "Master of Counselling",
-      image: brettImage,
-      credentials: "Clinical Member of PACFA Professional Body",
-      experience: "Over 25 years' experience",
-      specialties: ["Practical tools", "Evidence-based interventions", "Solution-focused therapy"],
-    },
-  ];
+  const therapist = {
+    id: "brett",
+    name: "Brett Boyland",
+    title: "Master of Counselling",
+    image: brettImage,
+    credentials: "Clinical Member of PACFA Professional Body",
+    experience: "Over 25 years' experience",
+    specialties: ["Practical tools", "Evidence-based interventions", "Solution-focused therapy"],
+  };
 
   const benefits = [
     "Personalized treatment plans tailored to your needs",
@@ -62,7 +50,7 @@ const CounsellingPage = () => {
                   Counselling Sessions
                 </h1>
                 <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
-                  One-on-one therapeutic sessions tailored to your unique needs. Our experienced practitioners provide compassionate, evidence-based care to support your mental health journey.
+                  One-on-one therapeutic sessions tailored to your unique needs. Brett provides compassionate, evidence-based care to support your mental health journey.
                 </p>
 
                 {/* Price Card */}
@@ -116,58 +104,53 @@ const CounsellingPage = () => {
           </div>
         </section>
 
-        {/* Therapists Section */}
+        {/* Therapist Section */}
         <section className="section-padding bg-muted/30">
           <div className="container-wide mx-auto">
             <div className="text-center max-w-3xl mx-auto mb-12">
               <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground mb-4">
-                Choose Your Therapist
+                Your Therapist
               </h2>
               <p className="text-muted-foreground text-lg">
-                Both our therapists are highly qualified professionals dedicated to your care.
+                Brett Boyland is a highly qualified professional dedicated to your care.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              {therapists.map((therapist) => (
-                <div
-                  key={therapist.id}
-                  className="bg-card rounded-2xl overflow-hidden border border-border/50 hover:shadow-card transition-all duration-300"
-                >
-                  <div className="aspect-[4/3] overflow-hidden">
-                    <img
-                      src={therapist.image}
-                      alt={therapist.name}
-                      className="w-full h-full object-cover object-top"
-                    />
+            <div className="max-w-md mx-auto">
+              <div className="bg-card rounded-2xl overflow-hidden border border-border/50 hover:shadow-card transition-all duration-300">
+                <div className="aspect-[4/3] overflow-hidden">
+                  <img
+                    src={therapist.image}
+                    alt={therapist.name}
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="font-display text-xl font-semibold text-foreground mb-1">
+                    {therapist.name}
+                  </h3>
+                  <p className="text-primary text-sm font-medium mb-3">
+                    {therapist.title}
+                  </p>
+                  <p className="text-muted-foreground text-sm mb-4">
+                    {therapist.credentials}
+                  </p>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
+                    <Shield size={16} className="text-primary" />
+                    {therapist.experience}
                   </div>
-                  <div className="p-6">
-                    <h3 className="font-display text-xl font-semibold text-foreground mb-1">
-                      {therapist.name}
-                    </h3>
-                    <p className="text-primary text-sm font-medium mb-3">
-                      {therapist.title}
-                    </p>
-                    <p className="text-muted-foreground text-sm mb-4">
-                      {therapist.credentials}
-                    </p>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
-                      <Shield size={16} className="text-primary" />
-                      {therapist.experience}
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {therapist.specialties.map((specialty, i) => (
-                        <span
-                          key={i}
-                          className="px-2 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full"
-                        >
-                          {specialty}
-                        </span>
-                      ))}
-                    </div>
+                  <div className="flex flex-wrap gap-2">
+                    {therapist.specialties.map((specialty, i) => (
+                      <span
+                        key={i}
+                        className="px-2 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full"
+                      >
+                        {specialty}
+                      </span>
+                    ))}
                   </div>
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </section>

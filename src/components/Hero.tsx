@@ -34,7 +34,7 @@ const Hero = () => {
 
           {/* Subheadline */}
           <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-2xl mx-auto mb-12 animate-fade-up delay-200 leading-relaxed">
-            Professional counselling and psychotherapy services with over 55 years of combined experience. Compassionate, judgment-free care tailored to your unique journey.
+            Professional counselling and psychotherapy services with over 25 years of experience. Compassionate, judgment-free care tailored to your unique journey.
           </p>
 
           {/* CTAs */}
@@ -59,8 +59,8 @@ const Hero = () => {
                 <Heart className="text-primary" size={22} />
               </div>
               <div className="text-left">
-                <p className="font-semibold text-foreground">55+ Years</p>
-                <p className="text-sm text-muted-foreground">Combined Experience</p>
+                <p className="font-semibold text-foreground">25+ Years</p>
+                <p className="text-sm text-muted-foreground">Experience</p>
               </div>
             </div>
             <div className="hidden sm:block w-px h-12 bg-border" />
@@ -69,7 +69,7 @@ const Hero = () => {
                 <Shield className="text-primary" size={22} />
               </div>
               <div className="text-left">
-                <p className="font-semibold text-foreground">PACFA & ANZAP</p>
+                <p className="font-semibold text-foreground">PACFA</p>
                 <p className="text-sm text-muted-foreground">Registered</p>
               </div>
             </div>
