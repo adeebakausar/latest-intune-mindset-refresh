@@ -69,7 +69,7 @@ const Services = () => {
             <span className="block">Support</span>
           </h2>
           <p className="text-muted-foreground text-lg animate-fade-up delay-100">
-            Evidence-based counselling, professional supervision, and practical step-by-step programs designed to help you achieve lasting change.
+            Evidence-based counselling, professional supervision by Brett Boyland, and practical step-by-step programs designed to help you achieve lasting change.
           </p>
         </div>
 

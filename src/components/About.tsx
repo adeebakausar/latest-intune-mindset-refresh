@@ -27,7 +27,7 @@ const About = () => {
               At Intune Mindset, we believe in getting to the heart of what matters. Our approach combines decades of clinical experience with genuine human connection, helping you navigate life's challenges with clarity and confidence.
             </p>
             <p className="text-muted-foreground mb-8 leading-relaxed">
-              We specialize in psychoanalytic psychotherapy, offering deep, meaningful work that goes beyond surface-level solutions. Whether you're dealing with anxiety, trauma, grief, or seeking personal growth, we're here to walk alongside you.
+              Brett specializes in evidence-based counselling, offering practical tools and meaningful work that goes beyond surface-level solutions. Whether you're dealing with anxiety, trauma, grief, or seeking personal growth, he's here to walk alongside you.
             </p>
 
             {/* Values Grid */}
@@ -48,9 +48,9 @@ const About = () => {
               <div className="w-64 h-64 md:w-80 md:h-80 rounded-full border-2 border-dashed border-primary/20 flex items-center justify-center">
                 {/* Inner circle with stat */}
                 <div className="w-48 h-48 md:w-60 md:h-60 rounded-full bg-card border border-border shadow-soft flex flex-col items-center justify-center">
-                  <span className="font-display text-5xl md:text-6xl font-bold text-primary">55+</span>
+                <span className="font-display text-5xl md:text-6xl font-bold text-primary">25+</span>
                   <span className="text-muted-foreground text-sm text-center mt-2 px-4">
-                    Years Combined Experience
+                    Years Experience
                   </span>
                 </div>
               </div>

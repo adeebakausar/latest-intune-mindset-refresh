@@ -19,7 +19,6 @@ const SettingsPage = () => {
   
   // Form state
   const [stripeSecretKey, setStripeSecretKey] = useState("");
-  const [sandraCalendarUrl, setSandraCalendarUrl] = useState("");
   const [brettCalendarUrl, setBrettCalendarUrl] = useState("");
   
   // Load existing settings
@@ -35,9 +34,6 @@ const SettingsPage = () => {
         
         data?.forEach((setting) => {
           switch (setting.key) {
-            case "sandra_calendar_url":
-              setSandraCalendarUrl(setting.value || "");
-              break;
             case "brett_calendar_url":
               setBrettCalendarUrl(setting.value || "");
               break;
@@ -57,14 +53,6 @@ const SettingsPage = () => {
   const handleSaveCalendarSettings = async () => {
     setIsSaving(true);
     try {
-      // Update Sandra's calendar URL
-      const { error: sandraError } = await supabase
-        .from("settings")
-        .update({ value: sandraCalendarUrl || null })
-        .eq("key", "sandra_calendar_url");
-      
-      if (sandraError) throw sandraError;
-
       // Update Brett's calendar URL
       const { error: brettError } = await supabase
         .from("settings")
@@ -179,23 +167,6 @@ const SettingsPage = () => {
                     </CardHeader>
                     <CardContent className="space-y-6">
                       <div className="space-y-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="sandra-calendar">
-                            Sandra Russet-Silk - Calendar Embed URL
-                          </Label>
-                          <Input
-                            id="sandra-calendar"
-                            type="url"
-                            placeholder="https://calendar.google.com/calendar/embed?src=... or https://calendly.com/..."
-                            value={sandraCalendarUrl}
-                            onChange={(e) => setSandraCalendarUrl(e.target.value)}
-                            disabled={isLoading}
-                          />
-                          <p className="text-xs text-muted-foreground">
-                            Paste your Google Calendar embed URL or Calendly scheduling link
-                          </p>
-                        </div>
-
                         <div className="space-y-2">
                           <Label htmlFor="brett-calendar">
                             Brett Boyland - Calendar Embed URL

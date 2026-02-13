@@ -44,7 +44,7 @@ const Footer = () => {
             </p>
             <div className="flex items-center gap-2 text-sm mb-4">
               <Heart size={14} className="text-accent" />
-              <span className="text-primary-foreground/60">55+ years combined experience</span>
+              <span className="text-primary-foreground/60">25+ years experience</span>
             </div>
             <div className="flex items-center gap-3 text-sm mb-4">
               <Phone size={14} className="text-accent" />
@@ -164,7 +164,6 @@ const Footer = () => {
           </p>
           <div className="flex items-center gap-6 text-sm text-primary-foreground/50">
             <span>PACFA Registered</span>
-            <span>ANZAP Members</span>
           </div>
         </div>
       </div>

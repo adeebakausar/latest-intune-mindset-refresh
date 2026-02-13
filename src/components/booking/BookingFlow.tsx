@@ -5,7 +5,6 @@ import SlotSelection from "./SlotSelection";
 import CustomerForm from "./CustomerForm";
 import PaymentForm, { type CardData } from "./PaymentForm";
 import BookingConfirmation from "./BookingConfirmation";
-import sandraImage from "@/assets/sandra-russet-silk.png";
 import brettImage from "@/assets/brett-boyland.png";
 
 export interface Slot {
@@ -26,12 +25,6 @@ export interface CustomerData {
 }
 
 export const therapistInfo: Record<string, { name: string; title: string; image: string; price: string }> = {
-  sandra: {
-    name: "Sandra Russet-Silk",
-    title: "Psychoanalytic Psychotherapist",
-    image: sandraImage,
-    price: "$110.00 AUD",
-  },
   brett: {
     name: "Brett Boyland",
     title: "Master of Counselling",
@@ -42,7 +35,7 @@ export const therapistInfo: Record<string, { name: string; title: string; image:
 
 const BookingFlow = () => {
   const [step, setStep] = useState<"select" | "details" | "payment" | "confirm">("select");
-  const [selectedTherapist, setSelectedTherapist] = useState("sandra");
+  const [selectedTherapist, setSelectedTherapist] = useState("brett");
   const [slots, setSlots] = useState<Slot[]>([]);
   const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null);
   const [customerData, setCustomerData] = useState<CustomerData>({ name: "", email: "", phone: "", address: "", notes: "" });
