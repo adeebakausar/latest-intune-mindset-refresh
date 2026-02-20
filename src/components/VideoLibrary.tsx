@@ -1,27 +1,34 @@
 import { Play, Video, Lock, ArrowRight, Crown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { supabase } from "@/integrations/supabase/client";
 
 const VideoLibrary = () => {
+  const getVideoUrl = (fileName: string) => {
+    if (!fileName) return "";
+    const { data } = supabase.storage.from("videos").getPublicUrl(fileName);
+    return data.publicUrl;
+  };
+
   const brettVideos = [
-    { topic: "Anger Management", title: "Overcoming Anger: Tools for a Calmer Life", description: "Discover how to transform anger into clarity and balance with expert guidance from Brett at Intune Mindset.", vimeoId: "" },
-    { topic: "Anxiety & Panic Attack", title: "Finding Calm in the Storm: Managing Anxiety & Panic", description: "Learn practical strategies to regain control and find peace during moments of intense anxiety and panic.", vimeoId: "" },
-    { topic: "Bipolar", title: "Bipolar Disorder: Navigating the Highs and Lows", description: "Understanding the complexities of bipolar disorder and finding the right tools and support for a balanced life.", vimeoId: "" },
-    { topic: "Overcoming Paranoid", title: "Reclaiming Safety: Overcoming Paranoid Thoughts", description: "Ground yourself and challenge distorted thinking to reclaim your sense of security and peace of mind.", vimeoId: "" },
-    { topic: "Stress & Shame", title: "Lifting the Weight: Healing from Stress and Shame", description: "You are not broken. Discover how to calm your nervous system and transform stress and shame into self-worth.", vimeoId: "" },
-    { topic: "Trauma & PTSD", title: "Healing from Trauma: Your Journey to Recovery", description: "Break the silence and find the tools you need to heal from past trauma and move forward with purpose.", vimeoId: "" },
-    { topic: "Disrespect", title: "Standing Strong: Handling Disrespect with Dignity", description: "Learn how to set firm boundaries and reclaim your power when facing disrespect at home, work, or online.", vimeoId: "" },
-    { topic: "Motivational Interviewing", title: "Unlock Your Potential: The Power of Motivational Interviewing", description: "Discover your own reasons for change and take the first step toward a better future with Brett's guidance.", vimeoId: "" },
+    { topic: "Anger Management", title: "Overcoming Anger: Tools for a Calmer Life", description: "Discover how to transform anger into clarity and balance with expert guidance from Brett at Intune Mindset.", fileName: "" },
+    { topic: "Anxiety & Panic Attack", title: "Finding Calm in the Storm: Managing Anxiety & Panic", description: "Learn practical strategies to regain control and find peace during moments of intense anxiety and panic.", fileName: "" },
+    { topic: "Bipolar", title: "Bipolar Disorder: Navigating the Highs and Lows", description: "Understanding the complexities of bipolar disorder and finding the right tools and support for a balanced life.", fileName: "" },
+    { topic: "Overcoming Paranoid", title: "Reclaiming Safety: Overcoming Paranoid Thoughts", description: "Ground yourself and challenge distorted thinking to reclaim your sense of security and peace of mind.", fileName: "" },
+    { topic: "Stress & Shame", title: "Lifting the Weight: Healing from Stress and Shame", description: "You are not broken. Discover how to calm your nervous system and transform stress and shame into self-worth.", fileName: "" },
+    { topic: "Trauma & PTSD", title: "Healing from Trauma: Your Journey to Recovery", description: "Break the silence and find the tools you need to heal from past trauma and move forward with purpose.", fileName: "" },
+    { topic: "Disrespect", title: "Standing Strong: Handling Disrespect with Dignity", description: "Learn how to set firm boundaries and reclaim your power when facing disrespect at home, work, or online.", fileName: "" },
+    { topic: "Motivational Interviewing", title: "Unlock Your Potential: The Power of Motivational Interviewing", description: "Discover your own reasons for change and take the first step toward a better future with Brett's guidance.", fileName: "" },
   ];
 
   const sandraVideos = [
-    { topic: "Grief & Loss", title: "Healing Through Grief: Finding Meaning After Loss", description: "Sandra guides you through the silent storm of grief, offering compassion and tools to help you carry your loss differently.", vimeoId: "" },
-    { topic: "Coercive Control", title: "Reclaiming Your Voice: Understanding Coercive Control", description: "Recognize the signs of manipulation and power dynamics, and find the support you need to rebuild your autonomy.", vimeoId: "" },
-    { topic: "Sexual Abuse", title: "Courage to Heal: Recovery After Sexual Abuse", description: "Recovery is possible. Discover a safe path to reclaim your life, your body, and your future with professional support.", vimeoId: "" },
-    { topic: "Suicide Prevention", title: "Holding on to Hope: A Guide to Suicide Prevention", description: "You don't have to face the crisis alone. Learn the vital steps to stay safe and find the light in the darkness.", vimeoId: "" },
-    { topic: "Workplace Bullying", title: "Thriving at Work: Overcoming Workplace Bullying", description: "Don't suffer in silence. Learn how to identify bullying behavior and protect your mental health on the job.", vimeoId: "" },
-    { topic: "Self-Esteem", title: "Building Unshakeable Self-Worth: Silence Your Inner Critic", description: "Discover that you are enough. Sandra helps you build the confidence to show up as your authentic self.", vimeoId: "" },
-    { topic: "Relaxation", title: "The Art of Calm: Master Your Relaxation Practice", description: "Reconnect with your inner peace through guided techniques designed to soothe the body and clear the mind.", vimeoId: "" },
-    { topic: "Journaling", title: "Writing Your Way to Healing: The Power of Journaling", description: "Untangle your thoughts and name your feelings. Discover how journaling can lead to clarity, healing, and peace.", vimeoId: "" },
+    { topic: "Grief & Loss", title: "Healing Through Grief: Finding Meaning After Loss", description: "Sandra guides you through the silent storm of grief, offering compassion and tools to help you carry your loss differently.", fileName: "" },
+    { topic: "Coercive Control", title: "Reclaiming Your Voice: Understanding Coercive Control", description: "Recognize the signs of manipulation and power dynamics, and find the support you need to rebuild your autonomy.", fileName: "" },
+    { topic: "Sexual Abuse", title: "Courage to Heal: Recovery After Sexual Abuse", description: "Recovery is possible. Discover a safe path to reclaim your life, your body, and your future with professional support.", fileName: "" },
+    { topic: "Suicide Prevention", title: "Holding on to Hope: A Guide to Suicide Prevention", description: "You don't have to face the crisis alone. Learn the vital steps to stay safe and find the light in the darkness.", fileName: "" },
+    { topic: "Workplace Bullying", title: "Thriving at Work: Overcoming Workplace Bullying", description: "Don't suffer in silence. Learn how to identify bullying behavior and protect your mental health on the job.", fileName: "" },
+    { topic: "Self-Esteem", title: "Building Unshakeable Self-Worth: Silence Your Inner Critic", description: "Discover that you are enough. Sandra helps you build the confidence to show up as your authentic self.", fileName: "" },
+    { topic: "Relaxation", title: "The Art of Calm: Master Your Relaxation Practice", description: "Reconnect with your inner peace through guided techniques designed to soothe the body and clear the mind.", fileName: "" },
+    { topic: "Journaling", title: "Writing Your Way to Healing: The Power of Journaling", description: "Untangle your thoughts and name your feelings. Discover how journaling can lead to clarity, healing, and peace.", fileName: "" },
   ];
 
   type VideoData = typeof brettVideos[0];
@@ -30,13 +37,12 @@ const VideoLibrary = () => {
     <div className="group relative bg-card rounded-2xl border border-border/50 overflow-hidden hover:border-primary/30 hover:shadow-card transition-all duration-300">
       {/* 9:16 Video Area */}
       <div className="relative w-full" style={{ aspectRatio: "9/16" }}>
-        {video.vimeoId ? (
-          <iframe
-            src={`https://player.vimeo.com/video/${video.vimeoId}?badge=0&autopause=0&player_id=0`}
-            className="absolute inset-0 w-full h-full"
-            frameBorder="0"
-            allow="autoplay; fullscreen; picture-in-picture"
-            allowFullScreen
+        {video.fileName ? (
+          <video
+            src={getVideoUrl(video.fileName)}
+            className="absolute inset-0 w-full h-full object-cover"
+            controls
+            preload="metadata"
             title={video.title}
           />
         ) : (
