@@ -1,36 +1,94 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { FileText, BookOpen, Mail, Download, ArrowRight, Sparkles } from "lucide-react";
+import { FileText, BookOpen, Mail, Download, ArrowRight, Sparkles, Shield, Brain, Heart, ClipboardList } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const Resources = () => {
+  const getPdfUrl = (fileName: string) => {
+    const { data } = supabase.storage.from("pdf").getPublicUrl(fileName);
+    return data.publicUrl;
+  };
+
   const resources = [
     {
-      icon: FileText,
+      icon: ClipboardList,
       title: "PTSD/Trauma Checklist",
-      description: "A comprehensive self-assessment tool to help identify and understand trauma symptoms.",
+      description: "A comprehensive self-assessment tool to help identify and understand trauma symptoms with easy tick-box format.",
       type: "Free Download",
       badge: "Popular",
+      fileName: "PTSD_Trauma_Support_Team_Checklist_With_Tick_Boxes.pdf",
     },
     {
       icon: BookOpen,
-      title: "Journaling Tools",
-      description: "Guided journaling prompts and templates designed for meaningful self-reflection.",
-      type: "Digital Resource",
+      title: "PTSD/Trauma Journal",
+      description: "A detailed journaling guide designed specifically for processing trauma and PTSD experiences.",
+      type: "Free Download",
       badge: null,
+      fileName: "Detailed_PTSD_Trauma_Journal_IntuneMindset_withLogo.pdf",
     },
     {
       icon: FileText,
-      title: "Safety Plan Template",
-      description: "Create your personalized safety plan with step-by-step guidance for crisis situations.",
+      title: "Reflection Journal",
+      description: "Guided journaling prompts and templates designed for meaningful self-reflection and personal growth.",
+      type: "Free Download",
+      badge: null,
+      fileName: "Reflection_Journal.pdf",
+    },
+    {
+      icon: Shield,
+      title: "Safety Plan Booklet",
+      description: "Create your personalized safety plan with step-by-step guidance for crisis situations and suicide prevention.",
       type: "Free Download",
       badge: "Essential",
+      fileName: "suicide_prevention_safety_plan_booklet_with_logos_lines.pdf",
+    },
+    {
+      icon: Heart,
+      title: "Stress Management Checklist",
+      description: "A practical checklist and journal to help you identify, track, and manage your daily stress levels.",
+      type: "Free Download",
+      badge: null,
+      fileName: "stress_management_journal_checklist_with_header_logo.pdf",
+    },
+    {
+      icon: Brain,
+      title: "Living With OCD",
+      description: "A comprehensive guide to understanding and managing Obsessive-Compulsive Disorder with practical strategies.",
+      type: "Free Download",
+      badge: null,
+      fileName: "Living_With_OCD.pdf",
+    },
+    {
+      icon: Heart,
+      title: "Healing After Sexual Abuse",
+      description: "A compassionate guide for survivors on the path to healing, with practical exercises and support resources.",
+      type: "Free Download",
+      badge: null,
+      fileName: "Healing_Path_After_Sexual_Abuse_Intune_Mindset_with_Real_Phoenix_Header.docx",
     },
     {
       icon: Mail,
-      title: "Monthly Newsletter",
-      description: "Curated insights, practical tips, and resources delivered directly to your inbox.",
-      type: "Email Subscription",
+      title: "Newsletter – Dec 2025",
+      description: "Curated insights, practical tips, and resources from the Intune Mindset team.",
+      type: "Newsletter",
+      badge: "Latest",
+      fileName: "INTUNE_MINDSET_Newsletter_Dec_2025.pdf",
+    },
+    {
+      icon: Mail,
+      title: "Newsletter – Oct 2025",
+      description: "Monthly insights and mental health resources from our October edition.",
+      type: "Newsletter",
       badge: null,
+      fileName: "INTUNE_MINDSET_Newsletter_Oct_2025.pdf",
+    },
+    {
+      icon: FileText,
+      title: "Intune Mindset Survey",
+      description: "Help us understand your needs better by completing our confidential client feedback survey.",
+      type: "Free Download",
+      badge: null,
+      fileName: "Intune_Mindset_Survay.pdf",
     },
   ];
 
@@ -48,15 +106,18 @@ const Resources = () => {
             <span className="text-primary italic">Healing Journey</span>
           </h2>
           <p className="text-muted-foreground text-lg md:text-xl animate-fade-up delay-200">
-            We believe in empowering you with resources beyond our sessions. Access our curated collection of free tools and guides.
+            We believe in empowering you with resources beyond our sessions. Download our curated collection of free tools, guides, and journals.
           </p>
         </div>
 
-        {/* Resources Grid - Centered */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        {/* Resources Grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
           {resources.map((resource, index) => (
-            <div
+            <a
               key={index}
+              href={getPdfUrl(resource.fileName)}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group relative bg-card rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-card transition-all duration-300 cursor-pointer animate-fade-up flex flex-col"
               style={{ animationDelay: `${(index + 3) * 100}ms` }}
             >
@@ -91,13 +152,9 @@ const Resources = () => {
 
               {/* Action Link */}
               <div className="flex items-center gap-2 text-sm font-semibold text-primary group-hover:gap-3 transition-all mt-auto">
-                {resource.type === "Email Subscription" ? (
-                  <>Subscribe <Mail size={16} /></>
-                ) : (
-                  <>Download <Download size={16} /></>
-                )}
+                Download <Download size={16} />
               </div>
-            </div>
+            </a>
           ))}
         </div>
 
