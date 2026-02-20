@@ -127,7 +127,11 @@ const sandraTopics: Record<string, VideoTopicData> = {
     description: "Sandra guides you through the silent storm of grief, offering compassion and tools to help you carry your loss differently.",
     fileName: "Sandra/Navigating_Grief_&_Loss_with_Sandra_27324d.mp4",
     therapist: "Sandra",
-    suggestedVideos: [],
+    suggestedVideos: [
+      { name: "Healing Through Grief and Loss", vimeoLink: "https://vimeo.com/1111870644", durationSec: 85 },
+      { name: "Navigating Grief and Healing Together", vimeoLink: "https://vimeo.com/1111204474", durationSec: 355 },
+      { name: "Navigating Grief: You Are Not Alone", vimeoLink: "https://vimeo.com/1111184095", durationSec: 231 },
+    ],
   },
   "coercive-control": {
     topic: "Coercive Control",
@@ -135,7 +139,11 @@ const sandraTopics: Record<string, VideoTopicData> = {
     description: "Recognize the signs of manipulation and power dynamics, and find the support you need to rebuild your autonomy.",
     fileName: "Sandra/Sandra__Breaking_Free_from_Coercive_Control_939992.mp4",
     therapist: "Sandra",
-    suggestedVideos: [],
+    suggestedVideos: [
+      { name: "Understanding Coercive Control and Its Impact", vimeoLink: "https://vimeo.com/1110200610", durationSec: 413 },
+      { name: "Understanding Coercive Control and Its Effects", vimeoLink: "https://vimeo.com/1110200467", durationSec: 329 },
+      { name: "Understanding Financial Abuse in Relationships", vimeoLink: "https://vimeo.com/1109850653", durationSec: 373 },
+    ],
   },
   "sexual-abuse": {
     topic: "Sexual Abuse",
@@ -151,7 +159,10 @@ const sandraTopics: Record<string, VideoTopicData> = {
     description: "You don't have to face the crisis alone. Learn the vital steps to stay safe and find the light in the darkness.",
     fileName: "Sandra/Suicide_Prevention__Showing_Up_with_Sandra_25c80c.mp4",
     therapist: "Sandra",
-    suggestedVideos: [],
+    suggestedVideos: [
+      { name: "Self-Help Guide for Suicide Prevention", vimeoLink: "https://vimeo.com/1117714609", durationSec: 250 },
+      { name: "Suicide Prevention: Your Voice Matters", vimeoLink: "https://vimeo.com/1117714571", durationSec: 75 },
+    ],
   },
   "workplace-bullying": {
     topic: "Workplace Bullying",
@@ -167,7 +178,11 @@ const sandraTopics: Record<string, VideoTopicData> = {
     description: "Discover that you are enough. Sandra helps you build the confidence to show up as your authentic self.",
     fileName: "Sandra/Sandra_-_Self-Esteem_Journey_f58136.mp4",
     therapist: "Sandra",
-    suggestedVideos: [],
+    suggestedVideos: [
+      { name: "Building Self-Esteem Together", vimeoLink: "https://vimeo.com/1131995956", durationSec: 330 },
+      { name: "Rebuild Your Self-Esteem Today", vimeoLink: "https://vimeo.com/1131995618", durationSec: 65 },
+      { name: "Navigating Conflict with Care", vimeoLink: "https://vimeo.com/1109860413", durationSec: 281 },
+    ],
   },
   "relaxation": {
     topic: "Relaxation",
@@ -175,7 +190,12 @@ const sandraTopics: Record<string, VideoTopicData> = {
     description: "Reconnect with your inner peace through guided techniques designed to soothe the body and clear the mind.",
     fileName: "Sandra/Intune Mindset_ Finding Your Calm (60s Plan)''_1080p_caption.mp4",
     therapist: "Sandra",
-    suggestedVideos: [],
+    suggestedVideos: [
+      { name: "Progressive Muscle Relaxation Session", vimeoLink: "https://vimeo.com/1110218507", durationSec: 302 },
+      { name: "Journey to Inner Peace", vimeoLink: "https://vimeo.com/1109854209", durationSec: 216 },
+      { name: "Grounding Exercise for Calmness and Presence", vimeoLink: "https://vimeo.com/1109854061", durationSec: 289 },
+      { name: "Embracing Inner Peace Through Visualization", vimeoLink: "https://vimeo.com/1109853937", durationSec: 201 },
+    ],
   },
   "journaling": {
     topic: "Journaling",
@@ -183,7 +203,10 @@ const sandraTopics: Record<string, VideoTopicData> = {
     description: "Untangle your thoughts and name your feelings. Discover how journaling can lead to clarity, healing, and peace.",
     fileName: "Sandra/Journaling_with_Sandra_-_Intune_Mindset_4d3228.mp4",
     therapist: "Sandra",
-    suggestedVideos: [],
+    suggestedVideos: [
+      { name: "Journaling for Clarity: Write Your Way to Calm, Confidence and Growth", vimeoLink: "https://vimeo.com/1111873029", durationSec: 366 },
+      { name: "The Power of Journaling for Healing", vimeoLink: "https://vimeo.com/1110203515", durationSec: 366 },
+    ],
   },
 };
 
