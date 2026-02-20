@@ -15,6 +15,7 @@ import ContactPage from "./pages/ContactPage";
 import ResourcesPage from "./pages/ResourcesPage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import SettingsPage from "./pages/SettingsPage";
+import VideoDetailPage from "./pages/VideoDetailPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -38,6 +39,7 @@ const App = () => (
           <Route path="/resources" element={<ResourcesPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/video/:slug" element={<VideoDetailPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
