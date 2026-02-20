@@ -4,9 +4,21 @@ import { FileText, BookOpen, Mail, Download, ArrowRight, Sparkles, Shield, Brain
 import { supabase } from "@/integrations/supabase/client";
 
 const Resources = () => {
-  const getPdfUrl = (fileName: string) => {
-    const { data } = supabase.storage.from("pdf").getPublicUrl(fileName);
-    return data.publicUrl;
+  const handleDownload = async (fileName: string, title: string) => {
+    try {
+      const { data, error } = await supabase.storage.from("pdf").download(fileName);
+      if (error) throw error;
+      const url = URL.createObjectURL(data);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = fileName.split("/").pop() || title;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error("Download failed:", err);
+    }
   };
 
   const resources = [
@@ -113,11 +125,9 @@ const Resources = () => {
         {/* Resources Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
           {resources.map((resource, index) => (
-            <a
+            <div
               key={index}
-              href={getPdfUrl(resource.fileName)}
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={() => handleDownload(resource.fileName, resource.title)}
               className="group relative bg-card rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-card transition-all duration-300 cursor-pointer animate-fade-up flex flex-col"
               style={{ animationDelay: `${(index + 3) * 100}ms` }}
             >
@@ -154,7 +164,7 @@ const Resources = () => {
               <div className="flex items-center gap-2 text-sm font-semibold text-primary group-hover:gap-3 transition-all mt-auto">
                 Download <Download size={16} />
               </div>
-            </a>
+            </div>
           ))}
         </div>
 
